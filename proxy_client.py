@@ -6,8 +6,7 @@ def main():
     buffer_size = 4096
     payload = 'GET / HTTP/1.0\r\nHost: www.google.com\r\n\r\n' # notice it's not localhost, as it is in client.py
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        remote_ip = socket.gethostbyname(host)
-        sock.connect((remote_ip,port))
+        sock.connect((host,port))
         sock.sendall(payload.encode())
         sock.shutdown(socket.SHUT_WR)
         message = b""

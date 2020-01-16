@@ -2,12 +2,11 @@ import socket
 
 def main():
     host = "www.google.com"
-    buffer_size = 4096
     port = 80
+    buffer_size = 4096
     payload = 'GET / HTTP/1.0\r\nHost: '+host+'\r\n\r\n'
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        remote_ip = socket.gethostbyname(host)
-        sock.connect((remote_ip,port))
+        sock.connect((host,port))
         sock.sendall(payload.encode())
         sock.shutdown(socket.SHUT_WR)
         message = b""
