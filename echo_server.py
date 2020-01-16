@@ -1,25 +1,23 @@
 import requests, socket, threading, sys
 
 def handle(client):
-    # return
-    message = ""
     with client:
-        message = ""
-        # data = client.recv(1024).decode()
-        # while data != "end":
-        #     message += data
-        #     print(data)
-        #     data = client.recv(1024).decode()
-        client.sendall(message.encode())
+        data = client.recv(1024)
+        print(data.decode())
+        client.sendall(data)
 
 def main():
+    host = ""
+    port = 8001
+    num_connections = 5
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        sock.bind(('localhost',8001))
-        sock.listen(5)
-        for i in range(5):
+        sock.bind((host,port))
+        sock.listen(num_connections)
+        for i in range(num_connections):
             client, address = sock.accept()
-            print(client, address)
+            # print(client, address)
+            print("Connected by ", address)
             thread = threading.Thread(target=handle, args=(client,))
             thread.run()
 

@@ -1,26 +1,6 @@
-import requests, socket, pdb
+import socket
 
 def main():
-    # pdb.set_trace()
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.connect(('localhost',8001))
-        data = input()
-        while data:
-            sock.sendall(data.encode())
-            data = input()
-        sock.sendall(b"end")
-
-        return_message = sock.recv(1024).decode()
-        print(return_message)
-
-def main():
-    import urllib
-    page = urllib.request.urlopen("http://www.google.com")
-    contents = page.read()
-    print(contents)
-
-def main():
-    # pdb.set_trace()
     host = "www.google.com"
     buffer_size = 4096
     port = 80
